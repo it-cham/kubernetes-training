@@ -1,7 +1,7 @@
 # Backend Dockerfile
 # Node.js API server
 
-FROM node:18-alpine
+FROM node:lts-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -13,7 +13,7 @@ RUN apk add --no-cache curl
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm install --production
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs

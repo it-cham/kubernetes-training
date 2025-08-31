@@ -2,7 +2,7 @@
 # Multi-stage build for React application
 
 # Build stage
-FROM node:18-alpine as build
+FROM node:lts-alpine AS build
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm install --production
 
 # Copy source code
 COPY . .
@@ -19,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine
+FROM nginx:stable-alpine AS production
 
 # Copy built application from build stage
 COPY --from=build /app/build /usr/share/nginx/html
