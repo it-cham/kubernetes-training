@@ -11,7 +11,8 @@ Alternatively, this can be switched to `containerd` here.
 
 ![Installation parameter - Rancher Desktop](_attachments/params-rancher-desktop.png)
 
-In addition to the installation parameters, make sure to disable the traefik ingress controller in the settings. If this is required, it will be installed later on seperately.
+In addition to the installation parameters, make sure to disable the traefik ingress controller in the settings.
+If this is required, it will be installed later on seperately.
 
 ![Kubernetes preferences - Rancher Desktop](_attachments/k8s-rancher-desktop.png)
 
