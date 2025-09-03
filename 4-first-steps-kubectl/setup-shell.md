@@ -169,6 +169,11 @@ users:
       client-key-data:
 ```
 
+When using a managed solution like `Rancher Desktop` to install Kubernetes, you most likely did not yet handle your kubeconfig on your own.
+You can export your current kubeconfig using `kubectl config view --raw > FILENAME` and save it inside the directory structure above.
+
+> [!TIP] If you have multiple entries already in your kubeconfig, make sure to split them into the single-context format shown in the example file.
+
 ## Windows
 
 On Windows, the setup is limited a lot by the general compatibility of certain functionalities.
