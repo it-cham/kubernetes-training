@@ -1,0 +1,7 @@
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      apk add open-iscsi
+      rc-update add iscsid
+      rc-service iscsid start
