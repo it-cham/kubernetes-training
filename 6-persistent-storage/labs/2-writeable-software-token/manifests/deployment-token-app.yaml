@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: token-app
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: token-app
+  template:
+    metadata:
+      labels:
+        app: token-app
+    spec:
+      initContainers:
+        - name: init-token
+          image: busybox:1.36
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+
+              if [ -f /writable-tokens/license.token ]; then
+                  echo "Token already exists!"
+                  exit 0
+              fi
+
+              echo "Initialize software token"
+
+              mkdir -p /writable-tokens
+
+              ls -la /readonly-tokens
+
+              cp /readonly-tokens/license.token /writable-tokens/license.token
+
+              chmod 644 /writable-tokens/license.token
+
+              # Verify token was copied
+              echo "Token initialized:"
+              cat /writable-tokens/license.token
+
+              echo "Token initialization complete."
+
+          volumeMounts:
+            - name: readonly-token-volume
+              mountPath: /readonly-tokens
+              readOnly: true
+            - name: writable-token-volume
+              mountPath: /writable-tokens
+      volumes:
+        - name: readonly-token-volume
+          secret:
+            secretName: software-token
+
+        - name: writable-token-volume
+          persistentVolumeClaim:
+            claimName: token-storage-pvc
+
+      containers:
+        - name: token-app
+          image: busybox:1.36
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+          command: ["/bin/sh", "-c"]
+          args:
+            - cat /writable-tokens/license.token
+          volumeMounts:
+            - name: writable-token-volume
+              mountPath: /writable-tokens
