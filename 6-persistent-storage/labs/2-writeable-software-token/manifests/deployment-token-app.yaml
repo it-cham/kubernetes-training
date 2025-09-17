@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
         - name: init-token
-          image: busybox:1.36
+          image: busybox:1.37.0
           resources:
             limits:
               memory: "128Mi"
@@ -65,7 +65,7 @@ spec:
 
       containers:
         - name: token-app
-          image: busybox:1.36
+          image: busybox:1.37.0
           resources:
             limits:
               memory: "128Mi"

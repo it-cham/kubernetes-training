@@ -468,7 +468,7 @@ docker run -it --name devenv \
 docker run -d --name appdb \
   -v db-data:/var/lib/postgresql/data \
   -e POSTGRES_DB=myapp \
-  postgres:13
+  postgres:17
 ```
 
 ### Backup Pattern

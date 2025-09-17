@@ -485,8 +485,8 @@ kubectl describe deployment config-demo
 **Commands:**
 
 ```shell
-kubectl create deployment update-demo --image=nginx:1.20
-kubectl set image deployment/update-demo nginx=nginx:1.21
+kubectl create deployment update-demo --image=nginx:1.26
+kubectl set image deployment/update-demo nginx=nginx:1.28
 kubectl rollout status deployment/update-demo
 kubectl rollout history deployment/update-demo
 # If rollback needed:

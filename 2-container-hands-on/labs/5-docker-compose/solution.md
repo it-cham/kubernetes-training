@@ -59,7 +59,7 @@ wordpress:
 
 ```yaml
 mysql:
-  image: mysql:5.7                 # Use MySQL 5.7 (stable version)
+  image: mysql:8.4.6               # Use MySQL 8.4.6 (latest stable LTS version)
   environment:                     # MySQL configuration
     MYSQL_DATABASE: wordpress      # Create database named 'wordpress'
     MYSQL_USER: wordpress          # Create user 'wordpress'
@@ -341,7 +341,7 @@ docker compose down -v
 ### Remove Images
 
 ```bash
-docker rmi wordpress:latest mysql:5.7
+docker rmi wordpress:latest mysql:8.4.6
 ```
 
 ## Learning Outcomes

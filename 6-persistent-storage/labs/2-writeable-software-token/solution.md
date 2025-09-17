@@ -126,7 +126,7 @@ spec:
       # InitContainer copies token from Secret to writable PVC
       initContainers:
       - name: token-initializer
-        image: busybox:1.36
+        image: busybox:1.37.0
         command: ['sh', '-c']
         args:
         - |
@@ -163,7 +163,7 @@ spec:
       # Main application container
       containers:
       - name: token-app
-        image: busybox:1.36
+        image: busybox:1.37.0
         command: ['sh', '-c']
         args:
         - |

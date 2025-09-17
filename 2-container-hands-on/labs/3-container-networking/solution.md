@@ -308,7 +308,7 @@ docker network create backend-tier
 docker network create database-tier
 
 # Database (most isolated)
-docker run -d --name db --network database-tier postgres:13-alpine
+docker run -d --name db --network database-tier postgres:17-alpine
 
 # API Server (backend and database access)
 docker run -d --name api --network backend-tier nginx:stable

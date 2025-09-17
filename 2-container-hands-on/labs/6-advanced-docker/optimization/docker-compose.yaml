@@ -71,7 +71,7 @@ services:
       start_period: 45s
 
   database:
-    image: postgres:15-alpine
+    image: postgres:17-alpine
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
