@@ -1,4 +1,4 @@
-## Lab: Persistent Storage
+## Lab: Persistent Storage - Migrate to Longhorn Storage Class
 
 ### Scenario
 
