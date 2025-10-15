@@ -1,0 +1,59 @@
+# Mongo Express Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  namespace: mongo-lab
+  labels:
+    app: mongo-express
+    tier: frontend
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+        tier: frontend
+    spec:
+      containers:
+        - name: mongo-express
+          image: mongo-express:1.0-20-alpine3.19
+          # Debug commands
+          # command: ["/bin/sh", "-c"]
+          # args:
+          #   - sleep 300
+          # ports:
+          #   - containerPort: 8081
+          #     name: http
+          env:
+            - name: ME_CONFIG_BASICAUTH_ENABLED
+              value: "true"
+            - name: ME_CONFIG_BASICAUTH_USERNAME
+              value: "mongoexpressuser"
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
+              value: "mongoexpresspass"
+
+            - name: ME_CONFIG_MONGODB_URL
+              value: "mongodb://mongodb-headless:27017/?replicaSet=rs0"
+              # value: "mongodb://mongodb-0.mongodb-headless:27017,mongodb-1.mongodb-headless:27017/?replicaSet=rs0"
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: "root"
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              value: "example"
+            - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
+              value: "true"
+            - name: ME_CONFIG_SITE_SSL_ENABLED
+              value: "false"
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

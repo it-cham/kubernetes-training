@@ -1,0 +1,18 @@
+# MongoDB Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-headless
+  namespace: mongo-lab
+  labels:
+    app: mongodb
+spec:
+  type: ClusterIP
+  clusterIP: "None"
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
+      protocol: TCP
+      name: mongodb

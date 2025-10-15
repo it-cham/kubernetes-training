@@ -1,0 +1,13 @@
+# PersistentVolumeClaim for MongoDB data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  namespace: mongo-lab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path # Migrate to Longhorn for replication
+  resources:
+    requests:
+      storage: 2Gi
