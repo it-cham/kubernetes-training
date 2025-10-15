@@ -1,0 +1,16 @@
+$TTL 86400      ; 1 day
+
+; Primary Master Server - Start of Authority
+@                       IN      SOA     lx-mgmt-01.k3s.test.local. root.k3s.test.local. (
+                                                        2024022416      ; Serial
+                                                        604800          ; Refresh
+                                                        86400           ; Retry
+                                                        2419200         ; Expire
+                                                        604800          ; Negative Cache TTL
+                                                        )
+
+@                   IN      NS      lx-mgmt-01.k3s.test.local.
+
+; ------------- K3S Development Cluster --------------
+
+100     IN      PTR     k3s.test.local.

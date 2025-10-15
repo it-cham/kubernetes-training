@@ -1,0 +1,22 @@
+controller:
+  kind: DaemonSet # Runs on all nodes
+  service:
+    #   type: LoadBalancer
+    type: NodePort # All nodes with pods expose service
+    nodePorts:
+      http: 30080
+      https: 30443
+
+  # Run only on pods that are control planes
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: "true"
+
+  # Be allowed to run on control plane nodes
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+  ingressClassResource:
+    default: true
