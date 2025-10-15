@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stickysessions-deployment
+  namespace: sticky-session
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: stickysessions
+  template:
+    metadata:
+      labels:
+        app: stickysessions
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - "lx-k3s-agent-01"
+                      - "lx-k3s-agent-02"
+      containers:
+        - name: stickysessions-pods
+          image: registry.test.local/stickysessions:0.1.1
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
