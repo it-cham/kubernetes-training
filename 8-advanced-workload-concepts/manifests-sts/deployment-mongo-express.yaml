@@ -27,9 +27,9 @@ spec:
           # command: ["/bin/sh", "-c"]
           # args:
           #   - sleep 300
-          # ports:
-          #   - containerPort: 8081
-          #     name: http
+          ports:
+            - containerPort: 8081
+              name: http
           env:
             - name: ME_CONFIG_BASICAUTH_ENABLED
               value: "true"
