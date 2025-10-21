@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stickysessions
+  namespace: sticky-session-secure
+  labels:
+    app.kubernetes.io/name: stickysessions
+  annotations:
+    route.openshift.io/termination: edge
+spec:
+  ingressClassName: openshift-default
+  rules:
+    - host: stickysession.apps.okd.test.local
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            path: "/"
+            backend:
+              service:
+                name: stickysessions-service
+                port:
+                  number: 8080

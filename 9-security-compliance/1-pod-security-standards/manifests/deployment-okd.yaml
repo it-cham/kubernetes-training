@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stickysessions-deployment
+  namespace: sticky-session-secure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stickysessions
+  template:
+    metadata:
+      labels:
+        app: stickysessions
+    spec:
+      imagePullSecrets:
+        - name: image-pull-secret-harbor
+      securityContext:
+        fsGroup: 0
+        seccompProfile:
+          type: "RuntimeDefault"
+      containers:
+        - name: stickysessions
+          image: registry.company.com/tmp/stickysessions:0.1.4
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: logs
+              mountPath: /usr/local/tomee/logs
+            - name: temp
+              mountPath: /usr/local/tomee/temp
+            - name: work
+              mountPath: /usr/local/tomee/work
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: temp
+          emptyDir: {}
+        - name: work
+          emptyDir: {}

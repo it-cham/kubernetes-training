@@ -1,0 +1,18 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: stickysessions
+  namespace: sticky-session-secure
+spec:
+  podSelector:
+    matchLabels:
+      app: stickysessions
+  egress:
+    - {}
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 8080
+  policyTypes:
+    - Ingress
+    - Egress
