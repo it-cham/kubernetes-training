@@ -23,8 +23,7 @@ Your mission: Transform this insecure application into a production-ready, harde
 - k3s cluster with kubectl access
 - OpenShift cluster with CLI access
 - Docker or Podman for image building
-- Access to company image registry
-- Namespace `sticky-session-secure` created in k3s
+- Access to image registry
 
 ---
 
