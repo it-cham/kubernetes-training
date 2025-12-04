@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: monitoring-team
+subjects:
+  - kind: Group
+    name: frontend-team # Matches "O" field in certificate
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole # Changed from "Role" to "ClusterRole"
+  name: monitoring
+  apiGroup: rbac.authorization.k8s.io

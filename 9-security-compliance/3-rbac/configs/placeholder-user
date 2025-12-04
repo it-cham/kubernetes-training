@@ -1,0 +1,20 @@
+apiVersion: v1
+clusters:
+  - cluster:
+      certificate-authority-data: B64_ENCODED_CA_CERT
+      server: https://a.b.c.d:8443
+    name: kubernetes
+contexts:
+  - context:
+      cluster: kubernetes
+      namespace: placeholder
+      user: placeholder-user
+    name: placeholder-user@kubernetes
+current-context: placeholder-user@kubernetes
+kind: Config
+preferences: {}
+users:
+  - name: placeholder-user
+    user:
+      client-certificate-data: B64_ENCODED_CLIENT_CERT
+      client-key-data: B64_ENCODED_CLIENT_KEY
